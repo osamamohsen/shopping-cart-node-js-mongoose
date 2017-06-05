@@ -10,7 +10,11 @@ var mongoose = require('mongoose');
 
 
 var app = express();
-mongoose.connect('http://localhost:27017/shopping');
+//mongoose.connect('http://localhost:27017/shopping');
+mongoose.connect("mongodb://localhost:27017/shopping", function (err) {
+  if(!err) console.log("mongo working");
+  else console.log("Failed to Connected to DataBase");
+});
 
 // view engine setup
 app.engine('.hbs',expresshHbs({defaultLayout: 'layout',extname: '.hbs'}))
