@@ -29,6 +29,19 @@ router.post('/user/signup',passport.authenticate('local.signup',{
   failureFlash: true //which added in passport.js message:Email is in use
 }));
 
+router.post('/user/signin',passport.authenticate('local.signin',{
+  successRedirect: '/user/profile',
+  failureRedirect: '/user/signin',
+  failureFlash: true //which added in passport.js message:Email is in use
+}));
+
+router.get('/user/signin',function(req,res,next){
+  var messages = req.flash('error');//{message: 'Email is already in use.'} not save message key
+  res.render('user/signin',{ csrfToken: req.csrfToken() , messages: messages})
+});
+
+
+
 router.get('/user/profile',function(req,res,next){
   res.render('user/profile');
 });
